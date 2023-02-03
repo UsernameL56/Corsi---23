@@ -51,6 +51,15 @@ namespace Corsi___23
                         Console.ReadLine();
                         break;
                     case 2:
+                        //input
+                        Console.WriteLine("\nInserire la parola da cancellare: ");
+                        parola = Convert.ToString(Console.ReadLine());
+                        //richiamo alla funzione
+                        array = Cancellazione(array, ref indice, parola);
+                        Console.WriteLine("\nElemento cancellato correttamente");
+
+                        Console.WriteLine("Premere un pulsante per continuare...");
+                        Console.ReadLine();
                         break;
                     case 3:
                         
@@ -99,7 +108,28 @@ namespace Corsi___23
             //ritorno in base allo spazio disponibile
             return inserito;
         }
-
-        
+        static string[] Cancellazione(string[] array, ref int i, string input)
+        {
+            //ciclo per ricercare la parola nell'array
+            for(int z = 0; z < array.Length; z++)
+            {
+                //se la parola viene trovata allora
+                if (array[z] == input)
+                {
+                    //ciclo per sovrascrivere le parole per cancellare quella inserita
+                    while(z < i)
+                    {
+                        array[z] = array[z + 1];
+                        z++;
+                    }
+                    //decremento dell'indice data la parola cancellata
+                    i = i - 1;
+                    //uscita dal ciclo
+                    break;
+                }
+            }
+            //ritorno del nuovo ciclo
+            return array;
+        }
     }
 }
