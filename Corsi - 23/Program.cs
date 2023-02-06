@@ -62,13 +62,18 @@ namespace Corsi___23
                         Console.ReadLine();
                         break;
                     case 3:
-                        BubbleSort(array);
+                        //richiamo alla funzione
+                        BubbleSort(array, indice);
+
                         break;
                     case 4:
+                        //input
                         Console.WriteLine("\nInserire la parola che si vuole cercare: ");
                         parola = Convert.ToString(Console.ReadLine());
+                        //richiamo alla funzione di ricerca della parola in generale per verificare che sia presente nell'array
                         if (Ricerca(array, parola, ref indice))
                         {
+                            //richiamo alla funzione di ricerca sequenziale
                             int ricerca = RicercaSequenziale(array, parola);
                             Console.WriteLine("La parola è stata trovata in posizione " + ricerca);
                         }
@@ -85,7 +90,11 @@ namespace Corsi___23
                         
                         break;
                     case 7:
+                        //richiamo alla funzione
                         Stampa(array, indice);
+
+                        Console.WriteLine("Premere un pulsante per continuare...");
+                        Console.ReadLine();
                         break;
                     case 8:
                         
@@ -135,26 +144,35 @@ namespace Corsi___23
             return array;
         }
 
-        static void BubbleSort(string[] array)
+        static void BubbleSort(string[] array, int indice)
         {
+            //dichiarazione variabile temporanea d'appoggio
             string temp;
-            for (int x = 0; x < array.Length - 1; x++)                     // ripeti per tutti i numeri
+            //ciclo per ripetere tutte le parole
+            for (int x = 0; x < indice - 1; x++)
             {
-                for (int y = 0; y < array.Length - 1; y++)                 // li confronto tutti a coppie
-                    if (string.Compare(array[y], array[y+1]) == 1)                        // se ne trovo uno maggiore
+                //ciclo per confrontarle a coppie
+                for (int y = 0; y < indice - 1; y++)
+                    //se una parola viene dopo nell'alfabeto, allora scambiala con l'altra
+                    if (string.Compare(array[y], array[y+1]) == 1)                      
                     {
-                        temp = array[y];                          // li scambio tra loro
+                        temp = array[y];
                         array[y] = array[y + 1];
                         array[y + 1] = temp;
                     }
             }
         }
 
-            static int RicercaSequenziale(string[] array, string input)
+
+
+        static int RicercaSequenziale(string[] array, string input)
         {
+            //dichiarazione variabile per controllare la posizione della parola cercata
             int controllo = 0;
+            //ciclo per controllare tutto l'array
             for (int z = 0; z < array.Length; z++)
             {
+                //se la parola da cercare viene trovata allora fine ciclo
                 if (array[z] == input)
                 {
                     break;
@@ -163,6 +181,16 @@ namespace Corsi___23
             }
             return controllo;
         }
+
+        static void Stampa(string[]array, int indice)
+        {
+            for (int i = 0; i < indice; i++)
+            {
+                Console.Write(array[i] + ", ");
+            }
+        }
+
+
 
         static bool Ricerca(string[] array, string input, ref int indice)
         {
@@ -184,16 +212,6 @@ namespace Corsi___23
             }
             //ritorno in base all'input
             return trovato;
-        }
-
-        static void Stampa(string[]array, int indice)
-        {
-            for (int i = 0; i < indice; i++)
-            {
-                Console.Write(array[i] + ", ");
-            }
-            Console.WriteLine("Premere un pulsante per continuare...");
-            Console.ReadLine();
         }
     }
 }
