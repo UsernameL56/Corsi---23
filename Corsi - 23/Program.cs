@@ -12,7 +12,7 @@ namespace Corsi___23
         {
             //dichiarazioni 
             string[] array = new string[100];
-            string parola;
+            string parola, correzione;
             int indice = 0;
             int scelta = 0;
 
@@ -71,7 +71,7 @@ namespace Corsi___23
                         Console.WriteLine("\nInserire la parola che si vuole cercare: ");
                         parola = Convert.ToString(Console.ReadLine());
                         //richiamo alla funzione di ricerca della parola in generale per verificare che sia presente nell'array
-                        if (Ricerca(array, parola, ref indice))
+                        if (Ricerca(array, parola))
                         {
                             //richiamo alla funzione di ricerca sequenziale
                             int ricerca = RicercaSequenziale(array, parola);
@@ -87,7 +87,23 @@ namespace Corsi___23
                         
                         break;
                     case 6:
-                        
+                        //input
+                        Console.WriteLine("\nInserire la parola sbagliata che si vuole andare a cambiare(scriverla esattamente com'è stata digitata all'inizio): ");
+                        parola = Convert.ToString(Console.ReadLine());
+                        //controllo per verificare che la parola inserita sia effettivamente quella
+                        if (Ricerca(array, parola))
+                        {
+                            //secondo input
+                            Console.WriteLine("\nInserire la parola corretta che si vuole sostituire con quella sbagliata: ");
+                            correzione = Convert.ToString(Console.ReadLine());
+                            //richiamo alla funzione di input
+                            Modifica(array, parola, correzione);
+                        }
+                        else
+                            Console.WriteLine("\nParola inserita non trovata");
+
+                        Console.WriteLine("Premere un pulsante per continuare...");
+                        Console.ReadLine();
                         break;
                     case 7:
                         //richiamo alla funzione
@@ -182,6 +198,19 @@ namespace Corsi___23
             return controllo;
         }
 
+        static void Modifica(string[]array, string input, string correzione)
+        {
+            //ciclo per controllare tutto l'array
+            for (int z = 0; z < array.Length; z++)
+            {
+                //arrivati alla posizione della parola errata modificarla con quella nuova inserita
+                if (array[z] == input)
+                {
+                    array[z] = correzione;
+                }
+            }
+        }
+
         static void Stampa(string[]array, int indice)
         {
             for (int i = 0; i < indice; i++)
@@ -192,7 +221,7 @@ namespace Corsi___23
 
 
 
-        static bool Ricerca(string[] array, string input, ref int indice)
+        static bool Ricerca(string[] array, string input)
         {
             bool trovato = true;
             //ciclo per controllare se l'elemento inserito è presente nell'array
@@ -207,8 +236,6 @@ namespace Corsi___23
                 }
                 else
                     trovato = false;
-                //incremento dell'indice di ricerca per l'output nel main
-                indice++;
             }
             //ritorno in base all'input
             return trovato;
