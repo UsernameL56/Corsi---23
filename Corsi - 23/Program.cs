@@ -113,8 +113,13 @@ namespace Corsi___23
                         Console.ReadLine();
                         break;
                     case 8:
-                        
+                        if (indice > 1)
+                            LungoCorto(array, indice);
+                        else
+                            Console.WriteLine("Nell'array è presente una sola parola");
 
+                        Console.WriteLine("Premere un pulsante per continuare...");
+                        Console.ReadLine();
                         break;
                 }
             } while (scelta != 0);
@@ -219,7 +224,27 @@ namespace Corsi___23
             }
         }
 
-
+        static void LungoCorto(string[] array, int indice)
+        {
+            string Lungo = "";
+            string Corto = "";
+            for (int i = 0; i < indice; i++)
+            {
+                for (int z = 0; z < indice; z++)
+                {
+                    if (array[z].Length > array[z + 1].Length)
+                    {
+                        Lungo = array[z];
+                    }
+                    if (array[z].Length < array[z + 1].Length)
+                    {
+                       Corto  = array[z];
+                    }
+                }
+            }
+            Console.WriteLine("La parola più lunga è: " + Lungo);
+            Console.WriteLine("La parola più corta è: " + Corto);
+        }
 
         static bool Ricerca(string[] array, string input)
         {
