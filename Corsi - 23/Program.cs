@@ -215,19 +215,21 @@ namespace Corsi___23
 
         static void Ripetizioni(string[]array, int indice)
         {
-            string[] temp = new string[100];
             int contatore = 0;
+            //ciclo per controllare tutto l'array
             for (int i = 0; i < indice; i++)
             {
+                //ciclo per confrontare tutte le parole con una sola
                 for (int z = 0; z < indice; z++)
                 {
+                    //se si trova una parola uguale allora aumentare il contatore
                     if (array[i] == array[z])
                     {
                         contatore++;
                     }
                 }
+                //stampa di tutto l'array con accanto il numero di ripetizioni
                 Console.WriteLine(array[i] + " " + contatore);
-                temp[i] = array[i];
                 contatore = 0;
             }
         }
