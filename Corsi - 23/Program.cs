@@ -226,24 +226,32 @@ namespace Corsi___23
 
         static void LungoCorto(string[] array, int indice)
         {
-            string Lungo = "";
-            string Corto = "";
+            //dichiarazioni
+            string[] ArrayAppoggio = new string[100];
+            string temp3;
+            //creo una copia dell'array iniziale
             for (int i = 0; i < indice; i++)
             {
-                for (int z = 0; z < indice; z++)
+                ArrayAppoggio[i] = array[i];
+            }
+            //ciclo BubbleSort, basato sulla lunghezza dei caratteri, i caratteri più corti andranno all'inizio e quelli più lunghi in fondo
+            for (int i = 0; i < indice - 1; i++)
+            {
+                //ciclo per confrontarle a coppie
+                for (int z = 0; z < indice - 1; z++)
                 {
-                    if (array[z].Length > array[z + 1].Length)
+                    //se una parola è più lunga dell'altra, allora scambiala con l'altra
+                    if (ArrayAppoggio[z].Length > ArrayAppoggio[z+1].Length)
                     {
-                        Lungo = array[z];
-                    }
-                    if (array[z].Length < array[z + 1].Length)
-                    {
-                       Corto  = array[z];
+                        temp3 = ArrayAppoggio[z];
+                        ArrayAppoggio[z] = ArrayAppoggio[z + 1];
+                        ArrayAppoggio[z + 1] = temp3;
                     }
                 }
             }
-            Console.WriteLine("La parola più lunga è: " + Lungo);
-            Console.WriteLine("La parola più corta è: " + Corto);
+            //stampa
+            Console.WriteLine("La parola più lunga è: " + ArrayAppoggio[indice-1]);
+            Console.WriteLine("La parola più corta è: " + ArrayAppoggio[0]);   
         }
 
         static bool Ricerca(string[] array, string input)
