@@ -84,7 +84,10 @@ namespace Corsi___23
                         Console.ReadLine();
                         break;
                     case 5:
-                        
+                        Ripetizioni(array, indice);
+
+                        Console.WriteLine("Premere un pulsante per continuare...");
+                        Console.ReadLine();
                         break;
                     case 6:
                         //input
@@ -113,13 +116,19 @@ namespace Corsi___23
                         Console.ReadLine();
                         break;
                     case 8:
+                        //condizione per verificare che ci siano più di 1 parola nell'array
                         if (indice > 1)
+                            //richiamo alla funzione
                             LungoCorto(array, indice);
                         else
                             Console.WriteLine("Nell'array è presente una sola parola");
 
                         Console.WriteLine("Premere un pulsante per continuare...");
                         Console.ReadLine();
+                        break;
+                    case 9:
+                        //richiamo alla funzione
+                        Occorrenze(array, ref indice);
                         break;
                 }
             } while (scelta != 0);
@@ -203,6 +212,25 @@ namespace Corsi___23
             return controllo;
         }
 
+
+        static void Ripetizioni(string[]array, int indice)
+        {
+            string[] temp = new string[100];
+            int contatore = 0;
+            for (int i = 0; i < indice; i++)
+            {
+                for (int z = 0; z < indice; z++)
+                {
+                    if (array[i] == array[z])
+                    {
+                        contatore++;
+                    }
+                }
+                Console.WriteLine(array[i] + " " + contatore);
+                temp[i] = array[i];
+                contatore = 0;
+            }
+        }
         static void Modifica(string[]array, string input, string correzione)
         {
             //ciclo per controllare tutto l'array
@@ -254,6 +282,30 @@ namespace Corsi___23
             Console.WriteLine("La parola più corta è: " + ArrayAppoggio[0]);   
         }
 
+        static void Occorrenze(string[]array, ref int indice)
+        {
+            //ciclo per scorrere tutto l'array
+            for (int i = 0; i < indice; i++)
+            {
+                //ciclo per confrontare tutte le parole con una sola
+                for (int z = 0; z < indice; z++)
+                {
+                    //se si trova una parola uguale e diversa da se stessa allora cancellarla sovrapponendole le altre
+                    if (array[i] == array[z] && z != i && z>i)
+                    {
+                        while (z < indice)
+                        {
+                            array[z] = array[z + 1];
+                            z++;
+                        }
+                        indice = indice - 1;
+                        //azzeramento della z per poter ricontrollare tutte le parole nell'array con nuovo indice
+                        z = 0;
+                    }
+                }
+            }
+        }
+        //funzione esterna per migliorare alcune funzioni
         static bool Ricerca(string[] array, string input)
         {
             bool trovato = true;
